@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <title>SKAIRO - Reserva tu vuelo</title>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;600;800&display=swap" rel="stylesheet">
+    <style>
+        *{box-sizing:border-box;margin:0;padding:0}
+        body{font-family:"Nunito",sans-serif;background:#f4f9ff;}
+
+        .header{height:80px;background:aliceblue}
+        .navbar{height:100%;display:flex;align-items:center;justify-content:space-between;padding:0 1.5rem;position:relative}
+        .logo{width:120px;cursor:pointer}
+        .menu_burguer{position:absolute;width:1px;height:1px;margin:-1px;padding:0;border:0;clip:rect(0 0 0 0);clip-path:inset(50%);overflow:hidden;white-space:nowrap;}
+        .list_icon{cursor:pointer;color:#592385;z-index:30}
+        .ul_links{width:100%;position:absolute;left:0;top:80px;background:greenyellow;height:0;overflow:hidden;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3rem;transition:height .28s ease, padding .28s ease;z-index:20;}
+        a{text-decoration:none;}
+        ol,ul{list-style:none;}
+        .menu_burguer:checked ~ .ul_links{height:calc(100vh - 80px);padding:2rem 0;}
+        .link{font-size:3.5rem;font-weight:700;color:#592385;transition:all .3s;padding:.2rem .7rem;}
+        .link:hover{background-color:rgb(131,131,131);}
+        @media (min-width:768px){
+          .list_icon{display:none}
+          .ul_links{position:static;height:auto;flex-direction:row;background:transparent;gap:2rem;padding:0;}
+          .link{font-size:1.6rem}
+        }
+
+        .container{max-width:900px;margin:3rem auto;padding:2rem;background:white;box-shadow:0 4px 10px rgba(0,0,0,0.1);border-radius:1rem;}
+        h1{text-align:center;margin-bottom:1.5rem;color:#592385;}
+        form{display:flex;flex-wrap:wrap;gap:1rem;justify-content:center;}
+        input,button{padding:.8rem 1rem;font-size:1rem;border-radius:.5rem;border:1px solid #ccc;}
+        input{flex:1;min-width:180px;}
+        button{background:#592385;color:white;border:none;cursor:pointer;transition:.3s;}
+        button:hover{background:#451b67;}
+    </style>
+</head>
+<body>
+<header class="header">
+    <nav class="navbar">
+        <img src="{{ url_for('static', filename='img/logo.png') }}" alt="SKAIRO" class="logo">
+        <input id="menu_burguer" class="menu_burguer" type="checkbox"/>
+        <label for="menu_burguer" aria-label="Abrir menú">
+            <svg xmlns="http://www.w3.org/2000/svg" width="35" height="35" fill="currentColor" class="list_icon"
+                 viewBox="0 0 16 16" aria-hidden="true">
+                <path fill-rule="evenodd"
+                      d="M2.5 12a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5m0-4a.5.5 0 0 1 .5-.5h10a.5.5 0 0 1 0 1H3a.5.5 0 0 1-.5-.5"/>
+            </svg>
+        </label>
+        <ul class="ul_links" role="menu" aria-hidden="false">
+            <li><a class="link" href="index.html">Inicio</a></li>
+            <li><a class="link" href="#">Estado de vuelo</a></li>
+            <li><a class="link" href="login.html">Iniciar Sesión</a></li>
+        </ul>
+    </nav>
+</header>
+
+<div class="container">
+    <h1>Busca tu vuelo</h1>
+    <form action="/buscar_vuelos" method="POST">
+        <input type="text" name="origen" placeholder="Origen (ej: LIM)" required>
+        <input type="text" name="destino" placeholder="Destino (ej: SCL)" required>
+        <button type="submit">Buscar vuelos</button>
+    </form>
+</div>
+<div class="container">
+    <h1>Reserva tu vuelo</h1>
+    <form action="/reservas">
+        <button type="submit">Go!</button>
+    </form>
+</div>
+</body>
+</html>
